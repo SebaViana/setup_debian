@@ -1,2 +1,9 @@
 packages:
   - openssh-server
+  # docker dependencies
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - software-properties-common
+  - lsb-release
