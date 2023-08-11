@@ -9,6 +9,11 @@
 
   tasks:
 
+    - name: Install required packages
+       apt:
+         name: "{{ initialPackages }}"
+         state: present
+
     - name: Add Docker key
       ansible.builtin.apt_key:
         url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
@@ -22,7 +27,7 @@
 
     - name: Install required packages
       apt:
-        name: "{{ packages }}"
+        name: "{{ finalPackages }}"
         state: present
 
     - name: Get Public IP

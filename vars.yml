@@ -1,4 +1,4 @@
-packages:
+initialPackages:
   - openssh-server
   - git
     # docker dependencies
@@ -8,3 +8,5 @@ packages:
   - gnupg
   - software-properties-common
   - lsb-release
+finalPackages:
+  - docker
