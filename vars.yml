@@ -1,7 +1,6 @@
 packages:
   - openssh-server
   - git
-  - sudo
     # docker dependencies
   - apt-transport-https
   - ca-certificates
