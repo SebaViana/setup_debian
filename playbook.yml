@@ -24,3 +24,14 @@
         name: "{{ packages }}"
         state: present
 
+    - name: Get Public IP
+      shell: curl -s https://api.ipify.org
+      register: public_ip
+
+    - name: Get Private IP
+      shell: ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
+      register: private_ip
+
+    - name: Display IP addresses
+      debug:
+        msg: "Public IP: {{ public_ip.stdout }}, Private IP: {{ private_ip.stdout }}"
