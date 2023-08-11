@@ -6,4 +6,4 @@ apt install ansible -y
 
 ansible --version
 
-ansible-playbook setup_ubuntu.yml
+ansible-playbook playbook.yml
