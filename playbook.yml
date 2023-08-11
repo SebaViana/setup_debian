@@ -10,9 +10,9 @@
   tasks:
 
     - name: Install required packages
-       apt:
-         name: "{{ initialPackages }}"
-         state: present
+      apt:
+        name: "{{ initialPackages }}"
+        state: present
 
     - name: Add Docker key
       ansible.builtin.apt_key:
