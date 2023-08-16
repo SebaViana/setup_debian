@@ -30,37 +30,6 @@
         name: "{{ finalPackages }}"
         state: present
 
-    - name: Display current sudoers users
-      shell: "getent group sudo"
-      register: sudoers_users
-      changed_when: false
-      ignore_errors: yes
-
-    - debug:
-        var: sudoers_users.stdout_lines
-
-    - pause:
-        prompt: "Press Enter to continue and add a new user to sudoers, or Ctrl+C to exit..."
-
-    - vars_prompt:
-        - name: username
-          prompt: "Enter the username to be added to sudoers (or leave empty to skip):"
-          private: no
-
-    - name: Check if username is provided
-      when: username is defined and username != ''
-      block:
-        - name: Add user to sudoers
-          lineinfile:
-            dest: /etc/sudoers
-            line: '{{ username }} ALL=(ALL) ALL'
-            state: present
-            validate: 'visudo -cf %s'
-      rescue:
-        - name: Username not provided, skipping task
-          debug:
-            msg: "Username not provided, skipping task"
-
     - name: Get Public IP
       shell: curl -s https://api.ipify.org
       register: public_ip
