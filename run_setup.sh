@@ -25,10 +25,12 @@ if id "$username" &>/dev/null; then
         # Add the user to the sudo group
         sudo usermod -aG sudo "$username"
         echo "User $username has been added to the sudo group."
+        echo "Group membership changes might require the user to log out and log back in for the changes to take effect."
+
     fi
 else
     echo "User $username does not exist."
 fi
-
+read -p "Press Enter to continue..."
 
 ansible-playbook playbook.yml
