@@ -9,4 +9,6 @@ initialPackages:
   - software-properties-common
   - lsb-release
 finalPackages:
-  - docker
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
