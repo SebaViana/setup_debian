@@ -1,14 +1,4 @@
 initialPackages:
   - openssh-server
   - git
-    # docker dependencies
-  - apt-transport-https
-  - ca-certificates
   - curl
-  - gnupg
-  - software-properties-common
-  - lsb-release
-finalPackages:
-  - docker-ce
-  - docker-ce-cli
-  - containerd.io
