@@ -40,4 +40,4 @@ else
 fi
 read -p "Press Enter to continue..."
 
-ansible-playbook playbook.yml
+ansible-playbook main.yml
