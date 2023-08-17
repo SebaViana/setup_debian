@@ -7,6 +7,9 @@
   vars_files:
     - vars.yml
 
+  roles:
+    - vim_install_config
+
   tasks:
 
     - name: Install required initial packages
