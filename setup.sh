@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+# Terminate execution if not running with root priviliges
 if [ "$(id -u)" -ne 0 ]; then
     echo "This script must be run with sudo or as root"
     exit 1
