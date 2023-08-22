@@ -9,10 +9,29 @@
     name: "{{ prometheus_image }}"
     source: pull
 
+- name: Create Prometheus configuration directory
+  file:
+    path: "{{ prometheus_config_dir }}"
+    state: directory
+
+- name: Include task to configure Prometheus to scrape Node Exporter
+  include_tasks: configure_node_exporter.yml
+  when: node_exporter_docker_role_executed | default(false)
+
+- name: Configure Prometheus to scrape Node Exporter
+  template:
+    src: "{{ prometheus_config_template_path }}"
+    dest: "{{ prometheus_config_dir }}/prometheus.yml"
+    owner: root
+    group: root
+    mode: "0644"
+
 - name: Start Prometheus container
   docker_container:
     name: "{{ prometheus_container_name }}"
     image: "{{ prometheus_image }}"
+    volumes:
+      - "{{ prometheus_config_dir }}:/etc/prometheus"
     ports:
       - "{{ prometheus_port }}:{{ prometheus_port }}"
     state: started

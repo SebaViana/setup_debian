@@ -2,3 +2,5 @@
 prometheus_container_name: prometheus
 prometheus_image: prom/prometheus
 prometheus_port: 9090
+prometheus_config_dir: /etc/prometheus
+prometheus_config_template_path: "{{ role_path }}/templates/prometheus.j2"

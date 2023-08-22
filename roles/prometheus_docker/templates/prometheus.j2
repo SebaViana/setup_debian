@@ -1,0 +1,5 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+{{ node_exporter_scrape_config | indent( width=2, first=True) }}
