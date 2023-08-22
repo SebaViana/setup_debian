@@ -1,0 +1,4 @@
+---
+node_exporter_container_name: node_exporter
+node_exporter_image: prom/node-exporter
+node_exporter_port: 9100
