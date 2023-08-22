@@ -10,6 +10,7 @@
   roles:
     - vim_install_config
     - docker_install
+    - grafana_docker
 
   tasks:
 
