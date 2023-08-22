@@ -1,0 +1,18 @@
+---
+- name: Ensure Docker is installed
+  apt:
+    name: docker.io
+    state: present
+
+- name: Pull Prometheus Docker image
+  docker_image:
+    name: "{{ prometheus_image }}"
+    source: pull
+
+- name: Start Prometheus container
+  docker_container:
+    name: "{{ prometheus_container_name }}"
+    image: "{{ prometheus_image }}"
+    ports:
+      - "{{ prometheus_port }}:{{ prometheus_port }}"
+    state: started

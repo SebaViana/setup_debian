@@ -11,6 +11,7 @@
     - vim_install_config
     - docker_install
     - grafana_docker
+    - prometheus_docker
 
   tasks:
 

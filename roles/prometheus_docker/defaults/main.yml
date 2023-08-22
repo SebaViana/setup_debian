@@ -1,0 +1,4 @@
+---
+prometheus_container_name: prometheus
+prometheus_image: prom/prometheus
+prometheus_port: 9090
