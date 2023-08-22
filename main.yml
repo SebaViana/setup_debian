@@ -4,19 +4,10 @@
   gather_facts: true 
   become: true
 
-  vars_files:
-    - vars.yml
-
   roles:
+    - install_packages
     - vim_install_config
     - docker_install
     - grafana_docker
     - node_exporter_docker
     - prometheus_docker
-  
-  tasks:
-
-    - name: Install required initial packages
-      apt:
-        name: "{{ packages }}"
-        state: present
