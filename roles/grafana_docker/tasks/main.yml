@@ -9,10 +9,25 @@
     name: "{{ grafana_image }}"
     source: pull
 
+- name: Create Grafana configuration directory
+  file:
+    path: "{{ grafana_config_dir }}"
+    state: directory
+
+- name: Copy Grafana data source configuration template
+  template:
+    src: "{{ grafana_datasource_template_path }}"
+    dest: "{{ grafana_config_dir}}/datasource-config.yaml"
+    owner: root
+    group: root
+    mode: "0644"
+
 - name: Run Grafana container
   docker_container:
     name: "{{ grafana_container_name }}"
     image: "{{ grafana_image }}"
     ports:
       - "{{ grafana_port }}:{{ grafana_port }}"
+    volumes:
+      - "{{ grafana_config_dir }}:/etc/grafana/provisioning/datasources/"
     state: started
