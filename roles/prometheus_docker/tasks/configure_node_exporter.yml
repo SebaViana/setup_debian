@@ -1,6 +1,13 @@
+- name: Get Docker Bridge Network IP
+  shell: docker network inspect bridge 
+  register: bridge_network_info
+
+- set_fact:
+    docker_bridge_ip: "{{ bridge_network_info.stdout | from_json | json_query('[] | [0].IPAM.Config[0].Gateway') }}"
+
 - name: Set multiline variable
   set_fact:
     node_exporter_scrape_config: |
       - job_name: 'node_exporter'
         static_configs:
-          - targets: ['127.0.0.1:{{ node_exporter_port }}']
+          - targets: ['{{ docker_bridge_ip }}:{{ node_exporter_port }}']
