@@ -1,5 +1,5 @@
-
-name: Install required initial packages
+---
+- name: Install required initial packages
   apt:
-  name: "{{ packages }}"
-  state: present
+    name: "{{ packages }}"
+    state: present
