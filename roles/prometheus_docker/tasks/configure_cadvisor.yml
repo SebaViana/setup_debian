@@ -1,0 +1,6 @@
+- name: Set multiline variable
+  set_fact:
+    cadvisor_scrape_config: |
+      - job_name: 'cadvisor'
+        static_configs:
+          - targets: ['{{ docker_bridge_ip }}:{{ cadvisor_port }}']

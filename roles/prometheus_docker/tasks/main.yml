@@ -18,7 +18,11 @@
   include_tasks: configure_node_exporter.yml
   when: node_exporter_docker_role_executed | default(false)
 
-- name: Configure Prometheus to scrape Node Exporter
+- name: Include task to configure Prometheus to scrape Cadvisor
+  include_tasks: configure_cadvisor.yml
+  when: cadvisor_docker_role_executed | default(false)
+
+- name: Configure Prometheus scrape configs
   template:
     src: "{{ prometheus_config_template_path }}"
     dest: "{{ prometheus_config_dir }}/prometheus.yml"
