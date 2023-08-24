@@ -1,0 +1,39 @@
+---
+- name: Ensure Docker is installed
+  apt:
+    name: docker.io
+    state: present
+
+- name: Pull Nginx Docker image
+  docker_image:
+    name: "{{ nginx_image }}"
+    source: pull
+
+- name: Create Nginx configuration directory
+  file:
+    path: "{{ nginx_config_dir }}"
+    state: directory
+
+- name: Enter Nginx Server Name
+  pause:
+    prompt: "Enter your desired Nginx Server Name: "
+  register: nginx_server_name_input
+
+- name: Set Nginx Server Name fact
+  set_fact:
+    nginx_server_name: "{{ nginx_server_name_input.user_input }}"
+
+- name: Include task to configure Nginx default.conf
+  include_tasks: configure_nginx_default_conf.yml
+
+- name: Start Nginx container
+  docker_container:
+    name: "{{ nginx_container_name }}" 
+    image: "{{ nginx_image }}" 
+    ports:
+      - "{{ nginx_port }}:{{ nginx_port }}"
+    volumes:
+      - "{{ nginx_config_dir }}:/etc/nginx/conf.d"
+    networks:
+      - name: bridge
+    state: started

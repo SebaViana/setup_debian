@@ -1,0 +1,40 @@
+- name: Set multiline variable
+  set_fact:
+    nginx_config_grafana: |
+        location /{{ grafana_container_name }}/ {
+        proxy_pass http://172.17.0.1:{{ grafana_port }}/;
+        sub_filter 'href="/' 'href="/{{ grafana_container_name }}/';
+        sub_filter_once off;
+        proxy_redirect ~^/(.*)$ /{{ grafana_container_name }}/$1;
+        }
+  when: grafana_docker_role_executed | default(false)
+
+- name: Set multiline variable
+  set_fact:
+    nginx_config_prometheus: |
+        location /{{ prometheus_container_name }}/ {
+        proxy_pass http://172.17.0.1:{{ prometheus_port }}/;
+        sub_filter 'href="/' 'href="/{{ prometheus_container_name }}/';
+        sub_filter_once off;
+        proxy_redirect ~^/(.*)$ /{{ prometheus_container_name }}/$1;
+        }
+  when: prometheus_docker_role_executed | default(false)
+
+- name: Set multiline variable
+  set_fact:
+    nginx_config_node_exporter: |
+        location /{{ node_exporter_container_name }}/ {
+        proxy_pass http://172.17.0.1:{{ node_exporter_port}}/;
+        sub_filter 'href="/' 'href="/{{ node_exporter_container_name }}/';
+        sub_filter_once off;
+        proxy_redirect ~^/(.*)$ /{{ node_exporter_container_name }}/$1;
+        }
+  when: node_exporter_docker_role_executed | default(false)
+
+- name: Create Nginx configuration template
+  template:
+    src: "{{ nginx_datasource_template_path }}"
+    dest: "{{ nginx_config_dir}}/default.conf"
+    owner: root
+    group: root
+    mode: "0644"

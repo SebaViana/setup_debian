@@ -12,3 +12,4 @@
     - cadvisor_docker
     - prometheus_docker
     - grafana_docker
+    - nginx_docker

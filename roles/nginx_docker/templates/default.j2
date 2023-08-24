@@ -1,0 +1,11 @@
+server {
+    listen 80;
+    server_name {{ nginx_server_name }};
+
+{{ nginx_config_node_exporter | default('') }}
+
+{{ nginx_config_prometheus | default('') }}
+
+{{ nginx_config_grafana | default('') }}
+
+}

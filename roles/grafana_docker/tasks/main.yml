@@ -1,4 +1,8 @@
 ---
+- name: Set variable indicating role execution
+  set_fact:
+    grafana_docker_role_executed: true
+
 - name: Ensure Docker is installed
   apt:
     name: docker.io
