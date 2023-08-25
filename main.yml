@@ -8,6 +8,7 @@
     - install_packages
     - vim_install_config
     - docker_install
+    - jenkins_docker
     - node_exporter_docker
     - cadvisor_docker
     - prometheus_docker
