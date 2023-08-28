@@ -1,0 +1,22 @@
+---
+- name: Ensure Docker is installed
+  apt:
+    name: docker.io
+    state: present
+
+- name: Clone repository
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ clone_dir_dest }}" 
+
+- name: Build custom image
+  command: docker build -t {{ webui_urlindex_image }} {{ clone_dir_dest }}
+
+- name: Run custom webui_urlindex container
+  docker_container:
+    name: "{{ webui_urlindex_container_name }}"
+    image: "{{ webui_urlindex_image }}"
+    ports:
+      - "81:80"
+    state: started
+    restart_policy: unless-stopped

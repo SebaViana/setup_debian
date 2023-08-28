@@ -1,0 +1,4 @@
+repo_url: https://github.com/SebaViana/webUI-URLindex
+webui_urlindex_image: sebaviana/webui_urlindex:latest
+webui_urlindex_container_name: webui_urlindex
+clone_dir_dest: "{{ role_path }}/repo"
