@@ -20,3 +20,4 @@
     ports:
       - "{{ cadvisor_port }}:{{ cadvisor_port }}"
     state: started
+    restart_policy: unless-stopped

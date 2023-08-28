@@ -43,3 +43,4 @@
     ports:
       - "{{ prometheus_port }}:{{ prometheus_port }}"
     state: started
+    restart_policy: unless-stopped

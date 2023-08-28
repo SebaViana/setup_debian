@@ -37,3 +37,4 @@
     networks:
       - name: bridge
     state: started
+    restart_policy: unless-stopped

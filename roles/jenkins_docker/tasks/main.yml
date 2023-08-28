@@ -16,3 +16,4 @@
     ports:
       - "{{ jenkins_port }}:8080"
     state: started
+    restart_policy: unless-stopped

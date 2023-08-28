@@ -35,3 +35,4 @@
     volumes:
       - "{{ grafana_config_dir }}:/etc/grafana/provisioning/datasources/"
     state: started
+    restart_policy: unless-stopped
