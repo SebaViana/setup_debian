@@ -4,7 +4,10 @@
     name: docker.io
     state: present
 
-- name: Pull Jenkins Docker image
+- name: Build Custom Jenkins Docker image
+  command: docker build -t {{ jenkins_image }} {{ jenkins_dockerfile_path }}
+
+- name: Pull Custom Jenkins Docker image
   docker_image:
     name: "{{ jenkins_image }}"
     source: pull
@@ -15,5 +18,7 @@
     image: "{{ jenkins_image }}"
     ports:
       - "{{ jenkins_port }}:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     state: started
     restart_policy: unless-stopped
