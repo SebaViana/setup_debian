@@ -3,3 +3,17 @@ webui_urlindex_image: sebaviana/webui_urlindex:latest
 webui_urlindex_container_name: webui_urlindex
 clone_dir_dest: "{{ role_path }}/repo"
 webui_urlindex_config_dir: /etc/webui_urlindex
+webui_urlindex_config_jsonfile_name: urls.json
+webui_urlsjson_template_path: "{{ role_path }}/templates/urls.json.j2"
+
+containers_uis:
+  - name: "{{ grafana_container_name | default('N/A') }}"
+    port: "{{ grafana_port | default('N/A') }}"
+  - name: "{{ prometheus_container_name | default('N/A') }}"
+    port: "{{ prometheus_port | default('N/A') }}"
+  - name: "{{ node_exporter_container_name | default('N/A') }}"
+    port: "{{ node_exporter_port | default('N/A') }}"
+  - name: "{{ cadvisor_container_name | default('N/A') }}"
+    port: "{{ cadvisor_port | default('N/A') }}"
+  - name: "{{ jenkins_container_name | default('N/A') }}"
+    port: "{{ jenkins_port | default('N/A') }}"

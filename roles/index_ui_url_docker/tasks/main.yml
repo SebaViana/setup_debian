@@ -17,6 +17,11 @@
 - name: Build custom image
   command: docker build -t {{ webui_urlindex_image }} {{ clone_dir_dest }}
 
+- name: Generate JSON urls
+  template:
+    src: "{{ webui_urlsjson_template_path }}" 
+    dest: "{{ webui_urlindex_config_dir }}/{{ webui_urlindex_config_jsonfile_name }}" 
+
 - name: Run custom webui_urlindex container
   docker_container:
     name: "{{ webui_urlindex_container_name }}"
