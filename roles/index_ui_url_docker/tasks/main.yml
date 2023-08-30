@@ -9,6 +9,11 @@
     repo: "{{ repo_url }}"
     dest: "{{ clone_dir_dest }}" 
 
+- name: Create webui_urlindex configuration directory
+  file:
+    path: "{{ webui_urlindex_config_dir }}"
+    state: directory
+
 - name: Build custom image
   command: docker build -t {{ webui_urlindex_image }} {{ clone_dir_dest }}
 
@@ -18,5 +23,7 @@
     image: "{{ webui_urlindex_image }}"
     ports:
       - "81:80"
+    volumes:
+      - "{{ webui_urlindex_config_dir }}:/usr/share/nginx/html/json/"
     state: started
     restart_policy: unless-stopped
