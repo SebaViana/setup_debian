@@ -21,3 +21,4 @@
       - "{{ cadvisor_port }}:{{ cadvisor_port }}"
     state: started
     restart_policy: unless-stopped
+    volumes: "{{ cadvisor_volume_mounts }}"
